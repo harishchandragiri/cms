@@ -20,7 +20,7 @@
 4. Visit http://localhost:5173
 
 ## Admin Credentials
-- Username: admin
+- Email: john@example.com
 - Password: password123
 
 ## Features
