@@ -31,7 +31,7 @@ function Post() {
   return (
     <div className='flex justify-center mx-5'>
         <div className='mt-[55px] sm:mt-[75px]'>
-        <div className='flex flex-col items-center h-auto sm:w-[570px] lg:w-[980px] md:w-[710px] border-black border-[1px] rounded-md my-2 mx-10'>  
+        <div className='flex flex-col items-center bg-amber-100 h-auto sm:w-[570px] lg:w-[980px] md:w-[710px] border-black border-[1px] rounded-md my-2 mx-10'>  
             <div className='flex justify-end w-full mx-2'>
               {
                 (user.email === posts.email)&&

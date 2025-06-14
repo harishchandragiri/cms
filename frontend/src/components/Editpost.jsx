@@ -37,9 +37,9 @@ function Editpost() {
       <form className='flex justify-center' onSubmit={handleSubmit}>
         <div className='flex flex-col sm:w-96 sm:px-[19px] px-1 w-60 rounded-md'>
         <label htmlFor="" className='mx-3 font-bold'>Title:</label>
-        <input className='sm:w-80 w-52 h-10 m-3 border-2 border-black rounded-md' type="text" value={title} onChange={e => setTitle(e.target.value)} />
+        <input className='sm:w-80 w-52 h-10 m-3 px-3 py-2 border-2 border-black rounded-md' type="text" value={title} onChange={e => setTitle(e.target.value)} />
         <label htmlFor="" className='mx-3 font-bold'>Post:</label>
-        <textarea className='sm:w-80 w-52 h-32 m-3 border-2 border-black rounded-md' value={description} name="" id="" onChange={e => setDescription(e.target.value)}></textarea>
+        <textarea className='sm:w-80 w-52 h-32 m-3 px-3 py-2 border-2 border-black rounded-md' value={description} name="" id="" onChange={e => setDescription(e.target.value)}></textarea>
         <button className='sm:w-80 w-52 h-10 m-3 rounded-md border-2 cursor-pointer border-black bg-sky-400'>Update</button>
         </div>
       </form>

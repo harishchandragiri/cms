@@ -15,38 +15,40 @@ router.get('/', verifyUser, (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
   try {
     // const user = await UserModel.findOne({ email });
+    
+    // Compare input credentials with environment variables
+    if (email === process.env.USER_EMAIL && password === process.env.PASSWORD) {
+      const token = jwt.sign(
+        { email: process.env.USER_EMAIL, username: process.env.USER_USERNAME },
+        process.env.JWT_SECRET,
+        { expiresIn: '60m' }
+      );
 
-    const user = {
-    email: process.env.USER_EMAIL,
-    username: process.env.USER_USERNAME,
-    password: process.env.PASSWORD
-    };
+      res.cookie("Token", token, {
+        httpOnly: true,
+        sameSite: 'Lax',
+        secure: process.env.NODE_ENV === 'production'
+      });
 
-    if (user) {
-      // const match = await bcrypt.compare(password, user.password);
-
-            const match = user.password === password;
-
-      if (match) {
-        const token = jwt.sign({ email: user.email, username: user.username }, process.env.JWT_SECRET, { expiresIn: '60m' });
-        res.cookie("Token", token, {
-          httpOnly: true,
-          sameSite: 'Lax',
-          secure: process.env.NODE_ENV === 'production' 
-        });
-        return res.json('Success');
-      } else {
-        return res.json('Password Incorrect');
-      }
+      return res.json(
+        { status :'Success',   
+        user: {
+          email: process.env.USER_EMAIL,
+          username: process.env.USER_USERNAME
+        }
+       });
     } else {
-      return res.json('User does not exist');
+      return res.json('Invalid email or password');
     }
   } catch (err) {
-    res.json(err);
+    console.error(err);
+    res.status(500).json('Server error');
   }
 });
+
 
 // Logout
 router.get('/logout', verifyUser, (req, res) => {

@@ -16,12 +16,13 @@ export default function Login() {
         e.preventDefault();
             axios.post('http://localhost:3001/login', {email, password}, {withCredentials:true})
             .then(res => {
-                if(res.data==='Success'){
+                if(res.data.status==='Success'){
+                    setUser(res.data.user);
                     Navigate('/');         
                      //To refresh the page use it
                     //  window.location.href ='/';   //  For it remove the below code from above
                     // setVal(email);
-                    // setUser(res.data);
+ 
                 }
             })
             .catch(err => console.log(err))
@@ -33,11 +34,11 @@ export default function Login() {
             <form onSubmit={submitDetails}>
                 <div className='flex flex-col mx-2 justify-center'>
                     <label htmlFor="email" className='block rounded-[5px] px-32 m-1'>Email:</label>
-                    <input className='w-[370px] border border-black rounded-[5px]' type="email" onChange={e => setEmail(e.target.value)} />
+                    <input className='w-[370px] px-3 py-2 border border-black rounded-[5px]' type="email" onChange={e => setEmail(e.target.value)} />
                 </div>
                 <div className='flex flex-col mx-2 justify-center'>
                     <label htmlFor="password" className='block rounded-[5px] px-32 m-1 '>Password:</label>
-                    <input className='w-[370px] border border-black rounded-[5px]' type="password" onChange={e => setPassword(e.target.value)}/>
+                    <input className='w-[370px] px-3 py-2 border border-black rounded-[5px]' type="password" onChange={e => setPassword(e.target.value)}/>
                 </div>
                 <div className='flex my-5 justify-center'>
                 <button className='block border-2 cursor-pointer border-black rounded-[5px] w-[370px] m-1 bg-sky-400'>Login</button>
